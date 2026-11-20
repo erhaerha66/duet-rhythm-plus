@@ -1,0 +1,17 @@
+dist/
+node_modules/
+.env
+.env.*
+data/
+*.db
+*.db-*
+*.sqlite*
+*.log
+*.zip
+*.tgz
+*.key
+*.pem
+*.crt
+/.openai/
+/private/
+/exports/

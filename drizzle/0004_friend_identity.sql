@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS friend_identity (
+  user_id TEXT PRIMARY KEY NOT NULL,
+  guest_key TEXT UNIQUE NOT NULL
+);

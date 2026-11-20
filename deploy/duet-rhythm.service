@@ -1,0 +1,17 @@
+[Unit]
+Description=Duet Rhythm
+After=network.target
+
+[Service]
+User=duetrhythm
+Group=duetrhythm
+WorkingDirectory=/opt/duet-rhythm-plus
+EnvironmentFile=/etc/duet-rhythm.env
+ExecStart=/usr/bin/env node /opt/duet-rhythm-plus/server/node.mjs
+Restart=on-failure
+StateDirectory=duet-rhythm
+UMask=0077
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>双人节拍 · 房间管理</title>
+  <link rel="stylesheet" href="/style.css">
+  <script type="module" src="/admin.js"></script>
+</head>
+<body>
+  <header class="header"><div class="shell admin-header"><a href="/">双人节拍</a><h1>房间管理</h1></div></header>
+  <main class="shell admin-main">
+    <p id="admin-status" role="status">正在检查访问权限…</p>
+    <a id="admin-sites-signin" class="button primary" href="/signin-with-chatgpt?return_to=%2Fadmin" target="_top" hidden>使用 ChatGPT 登录</a>
+    <form id="admin-signin" class="admin-card admin-user-search" hidden>
+      <label class="field">管理密码<input type="password" name="password" autocomplete="current-password" maxlength="256" required></label>
+      <button type="submit" class="button primary">登录</button>
+    </form>
+    <div id="admin-content" hidden>
+      <div class="admin-summary"><strong id="people-count"></strong><strong id="room-count"></strong><button id="admin-refresh" type="button" class="button outline">刷新</button><button id="admin-logout" type="button" class="button outline">退出登录</button></div>
+      <section id="admin-users" class="admin-card" aria-labelledby="admin-users-title">
+        <h2 id="admin-users-title">用户数据</h2>
+        <form class="admin-user-search">
+          <label class="field">搜索用户<input type="search" name="q" maxlength="64" placeholder="昵称或用户 ID" autocomplete="off"></label>
+          <button type="submit" class="button outline">搜索</button>
+        </form>
+        <p class="admin-user-status" role="status"></p>
+        <div class="admin-user-list"></div>
+        <button type="button" class="button outline" data-user-more hidden>加载更多用户</button>
+        <div class="admin-user-detail" hidden></div>
+      </section>
+      <section class="admin-card" aria-labelledby="admin-reports-title">
+        <h2 id="admin-reports-title">玩家举报</h2>
+        <button id="report-toggle" type="button" class="button outline" aria-expanded="false" aria-controls="report-panel">查看举报</button>
+        <div id="report-panel" hidden>
+          <p id="admin-report-status" role="status"></p>
+          <div id="admin-reports"></div>
+          <nav class="report-pages" aria-label="举报分页" hidden>
+            <button id="report-prev" type="button" class="button outline">上一页</button>
+            <span id="report-page" role="status"></span>
+            <button id="report-next" type="button" class="button outline">下一页</button>
+          </nav>
+        </div>
+      </section>
+      <section class="admin-card traffic-card" aria-labelledby="traffic-title">
+        <div class="traffic-heading"><h2 id="traffic-title">网站流量</h2>
+          <label>统计范围 <select id="traffic-range"><option value="7">近 7 天</option><option value="30">近 30 天</option></select></label>
+        </div>
+        <p id="traffic-status" role="status">正在加载流量…</p>
+        <div id="traffic-content" hidden>
+          <dl class="traffic-metrics">
+            <div><dt>今日浏览量</dt><dd id="traffic-today-views"></dd></div>
+            <div><dt>今日独立访客</dt><dd id="traffic-today-visitors"></dd></div>
+            <div><dt id="traffic-total-label">近 7 天浏览量</dt><dd id="traffic-total-views"></dd></div>
+            <div><dt id="traffic-visitors-label">近 7 天独立访客</dt><dd id="traffic-total-visitors"></dd></div>
+          </dl>
+          <div id="traffic-chart-area" hidden>
+            <div class="traffic-chart-heading"><h3>按日浏览量</h3><span id="traffic-peak"></span></div>
+            <div id="traffic-chart" class="traffic-chart" aria-hidden="true"></div>
+            <div class="traffic-dates" aria-hidden="true"><span id="traffic-start"></span><span id="traffic-end"></span></div>
+            <details class="traffic-details"><summary>查看每日明细</summary><table>
+              <thead><tr><th scope="col">日期</th><th scope="col">浏览量</th><th scope="col">独立访客</th></tr></thead><tbody id="traffic-days"></tbody>
+            </table></details>
+          </div>
+          <p id="traffic-coverage"></p>
+        </div>
+      </section>
+      <section class="admin-card" aria-labelledby="admin-rooms-title"><h2 id="admin-rooms-title">在线房间</h2><div id="admin-rooms"></div></section>
+      <section id="room-inspection" class="admin-card" aria-labelledby="inspection-title" hidden>
+        <h2 id="inspection-title">房间详情</h2><p id="room-detail"></p>
+        <dl class="inspection-details">
+          <div><dt>房间成员</dt><dd id="inspection-players"></dd></div>
+          <div><dt>对局时间</dt><dd id="inspection-time"></dd></div>
+          <div><dt>旁观与候补</dt><dd id="inspection-audience"></dd></div>
+          <div><dt>房间语音</dt><dd id="inspection-voice"></dd></div>
+        </dl>
+      </section>
+      <section class="admin-card" aria-labelledby="admin-people-title"><h2 id="admin-people-title">在线玩家</h2><div id="admin-people"></div></section>
+    </div>
+  </main>
+</body>
+</html>
